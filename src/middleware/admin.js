@@ -4,12 +4,10 @@ var async = require('async');
 var winston = require('winston');
 var jsesc = require('jsesc');
 var nconf = require('nconf');
-var semver = require('semver');
 
 var user = require('../user');
 var meta = require('../meta');
 var plugins = require('../plugins');
-var versions = require('../admin/versions');
 
 var controllers = {
 	api: require('../controllers/api'),

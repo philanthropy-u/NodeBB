@@ -3,14 +3,11 @@
 var async = require('async');
 var nconf = require('nconf');
 var semver = require('semver');
-var winston = require('winston');
 
 var versions = require('../../admin/versions');
 var db = require('../../database');
 var meta = require('../../meta');
 var plugins = require('../../plugins');
-var user = require('../../user');
-var utils = require('../../utils');
 
 var dashboardController = module.exports;
 
@@ -121,25 +118,4 @@ function getGlobalField(field, callback) {
 	db.getObjectField('global', field, function (err, count) {
 		callback(err, parseInt(count, 10) || 0);
 	});
-}
-
-function getLastRestart(callback) {
-	var lastrestart;
-	async.waterfall([
-		function (next) {
-			db.getObject('lastrestart', next);
-		},
-		function (_lastrestart, next) {
-			lastrestart = _lastrestart;
-			if (!lastrestart) {
-				return callback();
-			}
-			user.getUserData(lastrestart.uid, next);
-		},
-		function (userData, next) {
-			lastrestart.user = userData;
-			lastrestart.timestampISO = utils.toISOString(lastrestart.timestamp);
-			next(null, lastrestart);
-		},
-	], callback);
 }

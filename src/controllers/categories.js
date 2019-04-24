@@ -3,7 +3,7 @@
 var meta = require('../meta');
 var categoriesController = module.exports;
 
-categoriesController.list = function (req, res, next) {
+categoriesController.list = function (req, res) {
 	res.locals.metaTags = [{
 		name: 'title',
 		content: String(meta.config.title || 'NodeBB'),
