@@ -10,6 +10,7 @@ module.exports = {
 	method: function (callback) {
 		var configJSON;
 		try {
+			// eslint-disable-next-line import/no-unresolved
 			configJSON = require('../../../config.json') || { [process.env.database]: true, database: process.env.database };
 		} catch (err) {
 			configJSON = { [process.env.database]: true, database: process.env.database };

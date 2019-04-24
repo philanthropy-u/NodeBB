@@ -6,6 +6,8 @@
  * See lib/config/default.js in the agent distribution for a more complete
  * description of configuration variables and their potential values.
  */
+
+// eslint-disable-next-line import/no-unresolved
 var nodebbNewRelicConfig = require('./config.json').newRelic;
 exports.config = {
 	/**

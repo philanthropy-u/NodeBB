@@ -120,6 +120,7 @@ function info() {
 			next();
 		},
 		function (next) {
+			// eslint-disable-next-line import/no-unresolved
 			var config = require('../../config.json');
 			console.log('  database: ' + config.database);
 			next();
@@ -129,6 +130,7 @@ function info() {
 			db.info(db.client, next);
 		},
 		function (info, next) {
+			// eslint-disable-next-line import/no-unresolved
 			var config = require('../../config.json');
 
 			switch (config.database) {
