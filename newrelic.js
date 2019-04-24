@@ -1,4 +1,5 @@
-'use strict'
+'use strict';
+
 /**
  * New Relic agent configuration.
  *
@@ -23,7 +24,7 @@ exports.config = {
 		 * production applications.
 		 */
 		filepath: require('path').join(process.cwd(), 'logs/newrelic_agent.log'),
-		level: 'error'
+		level: 'error',
 	},
 	/**
 	 * When true, all request headers except for those listed in attributes.exclude
@@ -50,7 +51,7 @@ exports.config = {
 			'response.headers.authorization',
 			'response.headers.proxyAuthorization',
 			'response.headers.setCookie*',
-			'response.headers.x*'
-		]
-	}
-}
+			'response.headers.x*',
+		],
+	},
+};

@@ -43,7 +43,7 @@ dashboardController.get = function (req, res, next) {
 					}
 
 					plugins.fireHook('filter:admin.notices', notices, next);
-				}
+				},
 			}, next);
 		},
 		function (results) {

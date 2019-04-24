@@ -57,7 +57,7 @@ module.exports = function (middleware) {
 					},
 					configs: function (next) {
 						meta.configs.list(next);
-					}
+					},
 				}, next);
 			},
 			function (results, next) {
@@ -89,7 +89,7 @@ module.exports = function (middleware) {
 					title: (acpPath || 'Dashboard') + ' | NodeBB Admin Control Panel',
 					bodyClass: data.bodyClass,
 					version: version,
-					
+
 				};
 
 				templateValues.template = { name: res.locals.template };

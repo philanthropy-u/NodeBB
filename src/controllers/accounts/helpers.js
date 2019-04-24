@@ -54,8 +54,8 @@ helpers.getUserDataByUserSlug = function (userslug, callerUID, callback) {
 					plugins.fireHook('filter:user.profileMenu', {
 						uid: uid,
 						callerUID: callerUID,
-						links:[]
-}, next);
+						links: [],
+					}, next);
 				},
 				groups: function (next) {
 					groups.getUserGroups([uid], next);
