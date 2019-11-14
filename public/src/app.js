@@ -182,11 +182,10 @@ app.cacheBuster = null;
 		require(['translator'], function (translator) {
 			translator.translate('[[error:invalid-session-text]]', function (translated) {
 				bootbox.alert({
-					title: '[[error:invalid-session]]',
 					message: translated,
 					closeButton: false,
 					callback: function () {
-						window.location.reload();
+						window.location.href = `${config.edx_host}/logout`;
 					},
 				});
 			});
