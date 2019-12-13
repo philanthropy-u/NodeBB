@@ -7,13 +7,15 @@ var winston = require('winston');
 var db = require('../database');
 
 module.exports = function (Categories) {
-	Categories.getCategoryData = function (cid, callback) {
+	Categories.getCategoryData = function (cid, callback, isModificationBlocked) {
 		async.waterfall([
 			function (next) {
 				db.getObject('category:' + cid, next);
 			},
 			function (category, next) {
-				modifyCategory(category);
+				if (!isModificationBlocked) {
+					modifyCategory(category);
+				}
 				next(null, category);
 			},
 		], callback);
