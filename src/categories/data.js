@@ -7,13 +7,20 @@ var winston = require('winston');
 var db = require('../database');
 
 module.exports = function (Categories) {
-	Categories.getCategoryData = function (cid, callback) {
+	Categories.getCategoryData = function (cid, callback, isModificationBlocked) {
 		async.waterfall([
 			function (next) {
 				db.getObject('category:' + cid, next);
 			},
 			function (category, next) {
-				modifyCategory(category);
+				if (!isModificationBlocked) {
+					// This option is for prividing data as-it-is in DB without modification
+					// REASON: Category-name may contain special characters and after
+					// modification, name gets changed due validator.escape function, if it 
+					// contains special characters. It will help in further quering group 
+					// have same name as category. 
+					modifyCategory(category);
+				}
 				next(null, category);
 			},
 		], callback);
