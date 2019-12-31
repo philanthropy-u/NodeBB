@@ -302,6 +302,47 @@ program
 
 require('./colors');
 
+program
+	.command('make_admin')
+	.description('Assign an user administration role')
+	.action(function () {
+		var prompt = require('prompt');
+		var async = require('async');
+		var validator = require('validator');
+
+		var User = require('../user');
+		var Database = require('../database');
+		var Groups = require('../groups');
+
+		async.waterfall([
+			Database.init,
+			function (next) {
+				prompt.get([
+					{
+						name: 'usernameOrEmail',
+						description: 'Please enter username or email'
+					},
+				], next);
+			},
+			function (data, next) {
+				var inputValue = data.usernameOrEmail;
+				if (validator.isEmail(inputValue)) {
+					return User.getUidByEmail(inputValue, next);
+				}
+				User.getUidByUsername(inputValue, next);
+			},
+			function (uid, next) {
+				Groups.join('administrators', uid, next);
+			},
+		], function (err, data) {
+			if(err) {
+				return console.error('user or email not found');
+			}
+			console.log('Success!');
+			process.exit(1);
+		});
+	});
+
 if (process.argv.length === 2) {
 	program.help();
 }
