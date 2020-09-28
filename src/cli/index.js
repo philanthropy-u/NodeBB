@@ -71,6 +71,7 @@ var program = require('commander');
 var pkg = require('../../package.json');
 var file = require('../file');
 var prestart = require('../prestart');
+var philuCommands = require('./philuCommands');
 
 program
 	.name('./nodebb')
@@ -108,6 +109,7 @@ if (!configExists && process.argv[2] !== 'setup') {
 process.env.CONFIG = configFile;
 
 // running commands
+philuCommands(program);
 program
 	.command('start')
 	.description('Start the NodeBB server')
